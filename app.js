@@ -2,8 +2,6 @@ const express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 
-app.use(require('./routes'));
-
 
 const app = express();
 const PORT = 3000; 
@@ -15,8 +13,12 @@ if(isProduction){
     mongoose.connect(`mongodb://${MONGO_URI}/${DATABASE}`);
 } else {
     mongoose.connect(`mongodb://${MONGO_URI}/${DATABASE}`);
+    console.log("Connection success")
     mongoose.set('debug', true);
 }
+
+app.use(require('./routes'));
+
 
 app.get('/', (req, res)=>{
      res.status(200);
