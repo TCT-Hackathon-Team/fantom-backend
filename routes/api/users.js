@@ -1,9 +1,13 @@
+//CRUD for users
+
 var mongoose = require('mongoose');
 var router = require('express').Router();
 var passport = require('passport');
 var User = mongoose.model('User');
 var auth = require('../auth');
 
+
+//get an user by wallet address
 router.get('/user', auth.required, function(req, res, next){
     User.find({walletAddress: req.payload.walletAddress}).then(function(user){
       if(!user){ return res.sendStatus(401); }
@@ -12,7 +16,7 @@ router.get('/user', auth.required, function(req, res, next){
     }).catch(next);
   });
 
-
+//authen user
 router.post('/users/login', function(req, res, next){
     if(!req.body.walletAddress){
       return res.status(422).json({errors: {address: "can't be blank"}});
@@ -30,7 +34,7 @@ router.post('/users/login', function(req, res, next){
     })(req, res, next);
   });
 
-  // Tao nguoi dung moi cho app
+  // create new user
   router.post('/users', function(req, res, next){
     var user = new User();
   
@@ -44,9 +48,22 @@ router.post('/users/login', function(req, res, next){
     }).catch(next);
   });
 
-  // Gan dia chi vi moi vao thong tin nguoi dung cu
+  // update wallet address for new user
   router.put('/users/:walletAddress', function(req, res) {
 
   })
+
+  //get list of guards that user is following
+  router.get('/user/guards', auth.required, function(req, res, next){
+    User.find({walletAddress: req.payload.walletAddress}).then(function(user){
+       if(!user){ return res.sendStatus(401); }
+     
+       // Get list of guards that user is following 
+       const currentUserGuards = user.guards;
+ 
+       return res.json({guards: currentUserGuards});
+     })
+     .catch(next);
+ }); 
 
   module.exports = router;
