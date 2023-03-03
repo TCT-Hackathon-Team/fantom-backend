@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var secret = require('../config').secret;
 
+// User Schema
 var UserSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     walletAddress: String,
