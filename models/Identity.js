@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
 var IdentitySchema = new mongoose.Schema({
-    idCard: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
-    passPort: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
-    driveLicense: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid']},
+    idCard: {type: String, lowercase: true, match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
+    passPort: {type: String, lowercase: true, match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
+    driveLicense: {type: String, lowercase: true, unique: true,  match: [/\S+@\S+\.\S+/, 'is invalid']},
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
@@ -13,5 +13,14 @@ var IdentitySchema = new mongoose.Schema({
      	default: Date.now
     }
   });
+
+
+  IdentitySchema.methods.toJSONFor = function(){
+    return {
+      idCard: this.idCard,
+      passPort: this.passPort,
+      driveLicense: this.driveLicense,
+    }
+  }
 
 mongoose.model('Identity', IdentitySchema);

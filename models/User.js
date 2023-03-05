@@ -3,15 +3,15 @@ var jwt = require('jsonwebtoken');
 var secret = require('../config').secret;
 
 var UserSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+    _id: {
+      type: mongoose.Types.ObjectId,
+      auto: true},
     walletAddress: String,
-    firstName: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
-    lastName: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
+    userAddress: String,
+    identityNumber: String,
     email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid']},
-    phoneNumber: {type: String, lowercase: true, match: [/\S+@\S+\.\S+/, 'is invalid']},
-    image: String,
-    identity: { type: mongoose.Schema.Types.ObjectId, ref: 'Identity' },
-    guards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Guard' }],
+    protectee: [{ type: mongoose.Types.ObjectId, ref: 'Guard' }],
+    guards: [{ type: mongoose.Types.ObjectId, ref: 'Guard' }],
     created: { 
       type: Date,
       default: Date.now
@@ -36,6 +36,7 @@ var UserSchema = new mongoose.Schema({
     exp.setDate(today.getDate() + 60);
   
     return jwt.sign({
+      id: this._id,
       walletAddress: this.walletAddress,
       exp: parseInt(exp.getTime() / 1000),
     }, secret);
@@ -43,14 +44,26 @@ var UserSchema = new mongoose.Schema({
 
   UserSchema.methods.toAuthJSON = function(){
     return {
+      userAddress: this.userAddress,
       walletAddress: this.walletAddress,
-      firstName: this.firstName,
-      lastName: this.lastName,
+      identityNumber: this.identityNumber,
       email: this.email,
-      token: this.generateJWT(),
-      phoneNumber: this.phoneNumber,
-      image: this.image
+      guards: this.guards
     };
   };
+
+  UserSchema.methods.addGuard = function(address){
+    if(this.guards.indexOf(address) === -1){
+      this.guards.push(address);
+    }
+    return this.save();
+  }
+
+  UserSchema.methods.addProtectee = function(address){
+    if(this.guards.indexOf(address) === -1){
+      this.guards.push(address);
+    }
+    return this.save();
+  }
 
 mongoose.model('User', UserSchema);

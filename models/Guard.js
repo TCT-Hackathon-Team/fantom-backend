@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
 
 var GuardSchema = new mongoose.Schema({
-    address: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
+    _id: {
+    type: mongoose.Types.ObjectId,
+    auto: true},
+    address: String,
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
@@ -11,5 +14,11 @@ var GuardSchema = new mongoose.Schema({
       default: Date.now
     }
   }, {timestamps: true});
+
+  GuardSchema.methods.toJSONFor = function(){
+    return {
+      address: this.address
+    }
+  }
 
 mongoose.model('Guard', GuardSchema);
