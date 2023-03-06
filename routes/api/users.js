@@ -5,6 +5,8 @@ var User = mongoose.model('User');
 var auth = require('../auth');
 var jwt = require('jsonwebtoken');
 var config = require('../../config');
+import { recoverPersonalSignature } from 'eth-sig-util';
+import { bufferToHex } from 'ethereumjs-util';
 
 /**
  * @route GET /api/user/me
@@ -130,9 +132,12 @@ router.post('/login', function(req, res, next){
                 if (!token) {
                   return new Error('Empty token');
                 }
+                const maxAge = 1*60*60;
+                res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
                 return resolve(token);
               }
             )
+            
           );
         })
         .then((accessToken) => res.json({ accessToken }))

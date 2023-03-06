@@ -8,7 +8,7 @@ var session = require('express-session');
 var methods = require('methods');
 
 const app = express();
-const PORT = 3000; 
+const PORT = 8080; 
 const MONGO_URI = '127.0.0.1:27017'
 const DATABASE = 'social_recovery'
 
@@ -41,6 +41,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(methodOverride());
 app.use(require('./routes'));
+app.use(require('./routes/api/initdb'))
 
 app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
