@@ -6,10 +6,10 @@ var UserSchema = new mongoose.Schema({
     _id: {
       type: mongoose.Types.ObjectId,
       auto: true},
-    walletAddress: String,
     userAddress: String,
+    contractAddress: String,
     identityNumber: String,
-    email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid']},
+    email: String,
     protectee: [{ type: mongoose.Types.ObjectId, ref: 'Guard' }],
     guards: [{ type: mongoose.Types.ObjectId, ref: 'Guard' }],
     created: { 
