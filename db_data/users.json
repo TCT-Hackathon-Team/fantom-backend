@@ -1,0 +1,112 @@
+[{
+  "_id": 0,
+  "userAddress": "0xCBb30B4Ff53e45372476ba004a775db606F78EB2",
+  "walletContractAddress": "",
+  "identityNumber": "0000000000",
+  "email": "test_1@gmail.com"
+},{
+  "_id": {
+    "$oid": "64036b96d6ac3198a6e5c6b0"
+  },
+  "protectee": [],
+  "guards": [
+    {
+      "$oid": "64038aff606624264fa078ac"
+    }
+  ],
+  "created": {
+    "$date": {
+      "$numberLong": "1677945750955"
+    }
+  },
+  "userAddress": "0xB0E3B66C977AEF974dF02396e0E405DeFc177E01c",
+  "identityNumber": "0000000001",
+  "email": "test_2@gmail.com",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1677945750973"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1677953832255"
+    }
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "64038aac606624264fa078aa"
+  },
+  "protectee": [],
+  "guards": [],
+  "created": {
+    "$date": {
+      "$numberLong": "1677953708658"
+    }
+  },
+  "userAddress": "0xB0E3B66C977AEF974dF02396e0E405DeFc177E01c",
+  "identityNumber": "0000000003",
+  "email": "test_4@gmail.com",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1677953708729"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1677953708729"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64038aff606624264fa078ac"
+  },
+  "protectee": [],
+  "guards": [],
+  "created": {
+    "$date": {
+      "$numberLong": "1677953791158"
+    }
+  },
+  "userAddress": "0x376B61ee2cD79ffeb56361bEb579F3393F59A9e5",
+  "identityNumber": "0000000002",
+  "email": "test_3@gmail.com",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1677953791179"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1677953791179"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64061386c15176f1646110ba"
+  },
+  "protectee": [],
+  "guards": [],
+  "created": {
+    "$date": {
+      "$numberLong": "1678119814391"
+    }
+  },
+  "userAddress": "0x645440242f86ea938f5f2225bd102d70a9de85cb",
+  "contractAddress": "test",
+  "identityNumber": "0000",
+  "email": "rest",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678119814393"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678119814393"
+    }
+  },
+  "__v": 0
+}]
